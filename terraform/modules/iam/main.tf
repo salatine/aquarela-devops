@@ -10,8 +10,8 @@ resource "aws_iam_user_policy" "allow_assume_with_tags" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = [
+        Effect = "Allow"
+        Action = [
           "sts:AssumeRole",
           "sts:TagSession"
         ]
