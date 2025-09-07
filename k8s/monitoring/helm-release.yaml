@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/salatine/aquarela-devops.git' # ou repo interno
+    repoURL: 'https://github.com/salatine/aquarela-devops.git'
     targetRevision: main
     path: k8s/monitoring
     helm:
@@ -19,3 +19,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
