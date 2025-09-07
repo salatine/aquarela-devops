@@ -2,6 +2,25 @@ resource "aws_iam_user" "eks_admin" {
   name = var.iam_username
 }
 
+resource "aws_iam_user_policy" "allow_assume_with_tags" {
+  name = "${var.iam_username}-allow-assume-role-with-tags"
+  user = aws_iam_user.eks_admin.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = [
+          "sts:AssumeRole",
+          "sts:TagSession"
+        ]
+        Resource = aws_iam_role.eks_admin_role.arn
+      }
+    ]
+  })
+}
+
 resource "aws_iam_role" "eks_admin_role" {
   name = "${var.iam_username}-eks-role"
   assume_role_policy = jsonencode({
