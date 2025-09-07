@@ -1,19 +1,22 @@
-service:
-  type: LoadBalancer
-  port: 80
-
 grafana:
   enabled: true
   adminUser: admin
   adminPassword: admin123
   service:
     type: LoadBalancer
+    port: 80
 
 prometheus:
+  service:
+    type: LoadBalancer
+    port: 80
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: false
 
 alertmanager:
+  service:
+    type: LoadBalancer
+    port: 80
   alertmanagerSpec:
     replicas: 1
   config:
