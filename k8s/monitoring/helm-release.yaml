@@ -13,6 +13,7 @@ spec:
       valueFiles:
         - values.yaml
       skipTests: true
+      installCRDs: true
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
