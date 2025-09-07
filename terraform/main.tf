@@ -15,12 +15,12 @@ module "eks" {
   cluster_name        = var.cluster_name
   cluster_version     = var.cluster_version
   vpc_id              = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
+  subnet_ids          = module.vpc.private_subnets
   node_desired        = var.node_desired
   node_min            = var.node_min
   node_max            = var.node_max
   node_instance_types = var.node_instance_types
-  depends_on = [module.vpc]
+  depends_on          = [module.vpc]
 }
 
 module "iam" {
