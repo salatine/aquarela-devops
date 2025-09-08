@@ -16,6 +16,7 @@ kube-prometheus-stack:
       replicas: 1
     config:
       global:
+        resolve_timeout: 5m
         smtp_smarthost: 'smtp.gmail.com:465'
         smtp_from: 'salatinea@gmail.com'
         smtp_require_tls: true
@@ -30,7 +31,6 @@ kube-prometheus-stack:
           email_configs:
             - to: 'salatinea@gmail.com'
               send_resolved: true
-              smarthost: 'smtp.gmail.com:465'
               auth_username:
                 name: alertmanager-smtp
                 key: smtp_user
