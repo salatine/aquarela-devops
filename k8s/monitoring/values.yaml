@@ -14,8 +14,7 @@ kube-prometheus-stack:
   alertmanager:
     alertmanagerSpec:
       secrets:
-        - alertmanager-smtp
-      replicas: 1
+        - 'alertmanager-smtp'
     config:
       global:
         resolve_timeout: 1m
@@ -28,9 +27,7 @@ kube-prometheus-stack:
         group_wait: 10s
         group_interval: 1m
         receiver: 'email-notifications'
-        continue: true
       receivers:
         - name: 'email-notifications'
           email_configs:
             - to: 'salatinea@gmail.com'
-              send_resolved: true
