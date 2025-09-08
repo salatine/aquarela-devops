@@ -30,4 +30,9 @@ kube-prometheus-stack:
         - to: 'salatinea@gmail.com'
           from: 'salatinea@gmail.com'
           smarthost: 'smtp.gmail.com:587'
+          hello: null
+          auth_username: 'salatinea@gmail.com'
+          auth_identity: null
+          auth_password_file: /etc/alertmanager/secrets/smtp_password
+          require_tls: true
           send_resolved: true
