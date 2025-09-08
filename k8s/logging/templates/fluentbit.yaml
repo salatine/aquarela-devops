@@ -1,4 +1,37 @@
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fluent-bit
+  namespace: logging
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: fluent-bit
+rules:
+  - apiGroups: [""]
+    resources:
+      - namespaces
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: fluent-bit
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: fluent-bit
+subjects:
+  - kind: ServiceAccount
+    name: fluent-bit
+    namespace: logging
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: fluent-bit-config
@@ -40,7 +73,6 @@ data:
         TLS             On
         TLS.Verify      Off
         Index           kube-logs
-        # Não use Type, é ES 8.x
 
   parsers.conf: |
     [PARSER]
@@ -50,35 +82,6 @@ data:
         Time_Key    time
         Time_Format %Y-%m-%dT%H:%M:%S.%LZ
         Time_Keep   On
-
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: fluent-bit
-  namespace: logging
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: fluent-bit
-rules:
-- apiGroups: [""]
-  resources: ["pods", "namespaces"]
-  verbs: ["get", "list", "watch"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: fluent-bit
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: fluent-bit
-subjects:
-- kind: ServiceAccount
-  name: fluent-bit
-  namespace: logging
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -98,18 +101,21 @@ spec:
     spec:
       serviceAccountName: fluent-bit
       containers:
-      - name: fluent-bit
-        image: fluent/fluent-bit:2.1
-        volumeMounts:
-        - name: varlog
-          mountPath: /var/log
-        - name: config
-          mountPath: /fluent-bit/etc/
+        - name: fluent-bit
+          image: fluent/fluent-bit:2.1
+          args:
+            - -c
+            - /fluent-bit/etc/fluent-bit.conf
+          volumeMounts:
+            - name: config
+              mountPath: /fluent-bit/etc/
+            - name: varlog
+              mountPath: /var/log
       volumes:
-      - name: varlog
-        hostPath:
-          path: /var/log
-      - name: config
-        configMap:
-          name: fluent-bit-config
+        - name: config
+          configMap:
+            name: fluent-bit-config
+        - name: varlog
+          hostPath:
+            path: /var/log
 
