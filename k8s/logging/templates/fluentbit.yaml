@@ -68,8 +68,8 @@ data:
         Match           *
         Host            elasticsearch-es-default.logging.svc.cluster.local
         Port            9200
-        HTTP_User       elastic
-        HTTP_Passwd     5Sj4bO2fW9a4QdVKF06Pl833
+        HTTP_User       ${ES_USER}
+        HTTP_Passwd     ${ES_PASSWORD}
         TLS             On
         TLS.Verify      Off
         Index           kube-logs
@@ -104,6 +104,14 @@ spec:
       containers:
         - name: fluent-bit
           image: fluent/fluent-bit:2.1
+          env:
+            - name: ES_USER
+              value: elastic
+            - name: ES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: elasticsearch-es-elastic-user
+                  key: elastic
           args:
             - -c
             - /fluent-bit/etc/fluent-bit.conf
