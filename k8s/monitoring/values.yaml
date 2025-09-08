@@ -17,7 +17,7 @@ kube-prometheus-stack:
     config:
       global:
         resolve_timeout: 1m
-        smtp_smarthost: 'smtp.gmail.com:465'
+        smtp_smarthost: 'smtp.gmail.com:587'
         smtp_from: 'salatinea@gmail.com'
       route:
         group_by: ['alertname']
