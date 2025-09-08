@@ -22,7 +22,7 @@ spec:
             - containerPort: 3000
           env:
             - name: ELASTIC_APM_SERVER_URL
-              value: "http://apm-server-apm-http.logging.svc:8200"
+              value: "https://apm-server-apm-http.logging.svc:8200"
             - name: ELASTIC_APM_SECRET_TOKEN
               valueFrom:
                 secretKeyRef:
