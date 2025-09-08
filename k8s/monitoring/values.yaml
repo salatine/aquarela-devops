@@ -19,12 +19,7 @@ kube-prometheus-stack:
         group_wait: 10s
         group_interval: 1m
         receiver: 'email-notifications'
-        routes:
-        - receiver: 'email-notifications'
-          matchers:
-            - matchType: =
-              name: alertname 
-              value: "Watchdog"
+        routes: []
       receivers:
         - name: 'email-notifications'
           email_configs:
