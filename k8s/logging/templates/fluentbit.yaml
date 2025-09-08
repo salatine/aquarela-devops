@@ -73,6 +73,7 @@ data:
         TLS             On
         TLS.Verify      Off
         Index           kube-logs
+        Suppress_Type_Name On
 
   parsers.conf: |
     [PARSER]
