@@ -29,7 +29,7 @@ data:
         TLS          On
         TLS.Verify   Off
         Index        kube-logs
-        Type         _doc
+        Suppress_Type_Name On
         Logstash_Format On
         Replace_Dots On
 
