@@ -27,6 +27,10 @@ kube-prometheus-stack:
         group_wait: 10s
         group_interval: 1m
         receiver: 'email-notifications'
+        routes: 
+        - receiver: 'email-notifications'
+          matchers:
+            - alertname =~ "TargetDown|KubeSchedulerDown|Watchdog"
       receivers:
         - name: 'email-notifications'
           email_configs:
