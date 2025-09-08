@@ -19,27 +19,4 @@ alertmanager:
     port: 80
   alertmanagerSpec:
     replicas: 1
-  config:
-    global:
-      smtp_smarthost: 'smtp.gmail.com:465'
-      smtp_from: 'salatinea@gmail.com'
-      smtp_require_tls: true
-    route:
-      group_by: ['alertname']
-      group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 1h
-      receiver: 'email-notifications'
-    receivers:
-      - name: 'email-notifications'
-        email_configs:
-          - to: 'salatinea@gmail.com'
-            send_resolved: true
-            smarthost: 'smtp.gmail.com:465'
-            auth_username:
-              name: alertmanager-smtp
-              key: smtp_user
-            auth_password:
-              name: alertmanager-smtp
-              key: smtp_password
-
+  configMapOverrideName: alertmanager-custom-config
