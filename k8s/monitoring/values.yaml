@@ -33,4 +33,4 @@ kube-prometheus-stack:
             - to: 'salatinea@gmail.com'
               send_resolved: true
               auth_username: 'salatinea@gmail.com'
-              auth_password_file: /etc/alertmanager/secrets/alertmanager-smtp/smtp_password
+              auth_password_file: /etc/alertmanager/secrets/smtp_password
