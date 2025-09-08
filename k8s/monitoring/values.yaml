@@ -5,8 +5,7 @@ kube-prometheus-stack:
     adminPassword: admin123
   alertmanager:
     alertmanagerSpec:
-      secrets:
-        - 'alertmanager-smtp'
+      secrets: ['alertmanager-smtp']
     config:
       global:
         resolve_timeout: 1m
