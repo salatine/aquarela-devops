@@ -22,7 +22,7 @@ spec:
           - name: FLEET_ENROLL
             value: "1"
           - name: FLEET_URL
-            value: "https://fleet-server.elastic-agent.svc:8220"
+            value: "http://fleet-server.elastic-agent.svc:8220"
           - name: FLEET_ENROLLMENT_TOKEN
             valueFrom:
               secretKeyRef:
