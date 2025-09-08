@@ -5,3 +5,8 @@ nodejs:
   image:
     repository: 833565098889.dkr.ecr.us-east-1.amazonaws.com/node-apm-demo
     tag: latest
+
+agent:
+  fleet:
+    tls:
+      verify_server_cert: false
