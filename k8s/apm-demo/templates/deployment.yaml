@@ -22,9 +22,12 @@ spec:
             - containerPort: 3000
           env:
             - name: ELASTIC_APM_SERVER_URL
-              value: "{{ .Values.apm.serverURL }}"
+              value: "http://apm-server-apm-http.logging.svc:8200"
             - name: ELASTIC_APM_SECRET_TOKEN
-              value: "{{ .Values.apm.secretToken }}"
+              valueFrom:
+                secretKeyRef:
+                  name: apm-server-apm-token
+                  key: secret-token
             - name: NODE_ENV
               value: "production"
           resources:
