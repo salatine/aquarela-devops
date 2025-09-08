@@ -1,8 +1,9 @@
 const apm = require('elastic-apm-node').start({
-  serviceName: 'node-apm-demo',
-  serverUrl: process.env.ELASTIC_APM_SERVER_URL || 'http://elasticsearch-es-default.logging.svc.cluster.local:8200',
-  secretToken: process.env.ELASTIC_APM_SECRET_TOKEN || '',
-  environment: 'development'
+    serviceName: 'node-apm-demo',
+    serverUrl: process.env.ELASTIC_APM_SERVER_URL || 'http://elasticsearch-es-default.logging.svc.cluster.local:8200',
+    secretToken: process.env.ELASTIC_APM_SECRET_TOKEN || '',
+    environment: 'development',
+    verifyServerCert: false
 });
 
 const express = require('express');
