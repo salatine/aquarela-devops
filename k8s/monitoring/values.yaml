@@ -28,6 +28,5 @@ kube-prometheus-stack:
       - name: 'email'
         email_configs:
         - to: 'salatinea@gmail.com'
-          from: 'salatinea@gmail.com'
-          smarthost: 'smtp.gmail.com:587'
-          send_resolved: true
+      - name: 'null'
+
