@@ -28,6 +28,16 @@ spec:
               secretKeyRef:
                 name: fleet-server-token
                 key: ENROLLMENT_TOKEN
+          - name: FLEET_SERVER_SERVICE_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: fleet-server-service-token
+                key: SERVICE_TOKEN
+        args:
+          - --enrollment-token=$(FLEET_ENROLLMENT_TOKEN)
+          - --url=http://fleet-server.elastic-agent.svc:8220
+          - --fleet-server-insecure-http
+          - --fleet-server-service-token=$(FLEET_SERVER_SERVICE_TOKEN)
         ports:
           - containerPort: 8220
             name: http
