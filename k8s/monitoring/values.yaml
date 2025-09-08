@@ -3,9 +3,20 @@ kube-prometheus-stack:
     enabled: true
     adminUser: admin
     adminPassword: admin123
+    service:
+      type: LoadBalancer
+      port: 80
+
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+
   alertmanager:
     alertmanagerSpec:
-      secrets: ['alertmanager-smtp']
+      replicas: 1
+      useExistingSecret: true
+      secrets:
+        - alertmanager-smtp
     config:
       global:
         resolve_timeout: 1m
@@ -17,16 +28,15 @@ kube-prometheus-stack:
         group_by: ['alertname']
         group_wait: 10s
         group_interval: 1m
-        receiver: 'email'
-        routes:
-        - receiver: 'email'
-          matchers:
-            - matchType: "="
-              name: "alertname"
-              value: "Watchdog"
+        receiver: 'email-notifications'
+        routes: []
       receivers:
-      - name: 'email'
-        email_configs:
-        - to: 'salatinea@gmail.com'
-      - name: 'null'
+        - name: 'email-notifications'
+          email_configs:
+            - to: 'salatinea@gmail.com'
+              from: 'salatinea@gmail.com'
+              smarthost: 'smtp.gmail.com:587'
+              send_resolved: true
+              auth_username: 'salatinea@gmail.com'
+              auth_password_file: /etc/alertmanager/secrets/smtp_password
 
