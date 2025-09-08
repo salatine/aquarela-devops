@@ -23,6 +23,8 @@ data:
         Port         9200
         Index        kube-logs
         Type         _doc
+        HTTP_User   elastic
+        HTTP_Passwd 5Sj4bO2fW9a4QdVKF06Pl833
 ---
 apiVersion: apps/v1
 kind: DaemonSet
