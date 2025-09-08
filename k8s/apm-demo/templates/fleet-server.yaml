@@ -19,7 +19,6 @@ spec:
       - name: fleet-server-http
         image: docker.elastic.co/elastic-agent/elastic-agent:9.1.3
         args:
-          - --fleet-server-es-insecure
           - --insecure
         env:
           - name: FLEET_ENROLL
