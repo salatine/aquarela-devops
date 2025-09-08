@@ -31,7 +31,7 @@ spec:
           - name: FLEET_SERVER_ENABLE
             value: "true"
           - name: FLEET_SERVER_ELASTICSEARCH_HOST
-            value: "http://elasticsearch-es-http.logging.svc:9200"
+            value: "https://elasticsearch-es-http.logging.svc:9200"
           - name: FLEET_SERVER_SERVICE_TOKEN
             valueFrom:
               secretKeyRef:
