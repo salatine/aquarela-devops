@@ -26,6 +26,6 @@ kube-prometheus-stack:
               name: "alertname"
               value: "Watchdog"
       receivers:
-        - name: 'email-notifications'
-          email_configs:
-            - to: 'salatinea@gmail.com'
+      - name: 'email-notifications'
+        email_configs:
+        - to: 'salatinea@gmail.com'
