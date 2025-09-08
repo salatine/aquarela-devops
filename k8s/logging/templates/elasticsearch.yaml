@@ -15,8 +15,8 @@ spec:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 10Gi
-            storageClassName: gp2   # <<< aqui a mágica
+                storage: 1Gi
+            storageClassName: gp2
       podTemplate:
         spec:
           containers:
