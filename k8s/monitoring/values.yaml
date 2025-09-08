@@ -14,6 +14,23 @@ kube-prometheus-stack:
   alertmanager:
     alertmanagerSpec:
       replicas: 1
-      useExistingSecret: true
-      secrets:
-        - alertmanager-prometheus-kube-prometheus-alertmanager
+    config:
+      global:
+        resolve_timeout: 1m
+        smtp_smarthost: 'smtp.gmail.com:587'
+        smtp_from: 'salatinea@gmail.com'
+      route:
+        group_by: ['alertname']
+        group_wait: 10s
+        group_interval: 1m
+        receiver: 'email-notifications'
+        continue: true
+      receivers:
+        - name: 'email-notifications'
+          email_configs:
+            - to: 'salatinea@gmail.com'
+              send_resolved: true
+              auth_username: 'salatinea@gmail.com'
+              auth_password_file: /etc/alertmanager/secrets/smtp_password
+    secrets:
+      - alertmanager-smtp
