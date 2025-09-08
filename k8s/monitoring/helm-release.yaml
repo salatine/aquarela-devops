@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "oci://ghcr.io/prometheus-community/charts"
-    chart: kube-prometheus-stack
-    targetRevision: 77.5.0
+    repoURL: "https://github.com/salatine/aquarela-devops.git"
+    targetRevision: main
+    path: k8s/monitoring
     helm:
       valueFiles:
         - values.yaml
