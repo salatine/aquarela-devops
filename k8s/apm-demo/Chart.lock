@@ -1,0 +1,6 @@
+dependencies:
+- name: apm-server
+  repository: https://helm.elastic.co
+  version: 8.5.1
+digest: sha256:9f3f0b75e1756c6b96b036537974bb82fbd9f2c111664b3c85a85623c426bc32
+generated: "2025-09-08T17:05:50.812508166-03:00"

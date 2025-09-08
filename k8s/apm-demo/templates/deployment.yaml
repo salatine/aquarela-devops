@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-apm-demo
+  labels:
+    app: nodejs-apm-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-apm-demo
+  template:
+    metadata:
+      labels:
+        app: nodejs-apm-demo
+    spec:
+      containers:
+        - name: nodejs
+          image: "{{ .Values.nodejs.image.repository }}:{{ .Values.nodejs.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: ELASTIC_APM_SERVER_URL
+              value: "{{ .Values.apm.serverURL }}"
+            - name: ELASTIC_APM_SECRET_TOKEN
+              value: "{{ .Values.apm.secretToken }}"
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+

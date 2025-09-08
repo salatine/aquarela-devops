@@ -1,0 +1,7 @@
+apm:
+  version: "8.11.0"
+
+nodejs:
+  image:
+    repository: 833565098889.dkr.ecr.us-east-1.amazonaws.com/node-apm-demo
+    tag: latest
