@@ -13,6 +13,8 @@ kube-prometheus-stack:
 
   alertmanager:
     alertmanagerSpec:
+      secrets:
+        - alertmanager-smtp
       replicas: 1
     config:
       global:
@@ -31,6 +33,4 @@ kube-prometheus-stack:
             - to: 'salatinea@gmail.com'
               send_resolved: true
               auth_username: 'salatinea@gmail.com'
-              auth_password_file: /etc/alertmanager/secrets/smtp_password
-    secrets:
-      - alertmanager-smtp
+              auth_password_file: /etc/alertmanager/secrets/alertmanager-smtp/smtp_password
