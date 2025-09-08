@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fleet-server
+  namespace: elastic-agent
+  labels:
+    app: fleet-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fleet-server
+  template:
+    metadata:
+      labels:
+        app: fleet-server
+    spec:
+      containers:
+      - name: fleet-server
+        image: docker.elastic.co/beats/elastic-agent:8.15.5
+        env:
+          - name: FLEET_ENROLL
+            value: "1"
+          - name: FLEET_URL
+            value: "https://fleet-server.elastic-agent.svc:8220"
+          - name: FLEET_ENROLLMENT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: fleet-server-token
+                key: ENROLLMENT_TOKEN
+        ports:
+          - containerPort: 8220
+            name: http
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleet-server
+  namespace: elastic-agent
+spec:
+  selector:
+    app: fleet-server
+  ports:
+    - protocol: TCP
+      port: 8220
+      targetPort: 8220
+  type: ClusterIP
