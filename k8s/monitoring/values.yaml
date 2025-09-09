@@ -1,8 +1,6 @@
 kube-prometheus-stack:
   grafana:
     enabled: true
-    adminUser: admin
-    adminPassword: admin123
     service:
       type: LoadBalancer
       port: 80
