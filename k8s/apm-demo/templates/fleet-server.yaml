@@ -43,7 +43,7 @@ spec:
                 key: SERVICE_TOKEN
           - name: FLEET_SERVER_INSECURE_HTTP
             value: "true"
-          - name: FLEET_SERVER_ELASTICSEARCH_CA
+          - name: ELASTICSEARCH_CA
             value: /etc/ssl/certs/es/es-ca.crt
         ports:
           - containerPort: 8220
